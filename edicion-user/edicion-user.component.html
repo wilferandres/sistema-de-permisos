@@ -1,0 +1,83 @@
+<div class="ini">
+    <button class="inicio" routerLink="/main">Menú Principal</button>
+</div>
+<div *ngIf="mostrarUsuarios && usuarios && usuarios.length > 0" class="contenedor-citas">
+    <h2 class="usuarios-titulo">Lista de Usuarios</h2>
+    <table class="usuarios-tabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Identificación</th>
+                <th>Sexo</th>
+                <th>Contraseña</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Editar</th> <!-- Nueva columna para las acciones -->
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido }}</td>
+                <td>{{ usuario.telefono }}</td>
+                <td>{{ usuario.direccion }}</td>
+                <td>{{ usuario.identificacion }}</td>
+                <td>{{ usuario.sexo }}</td>
+                <th>{{usuario.contrasena}}</th>
+                <td>{{ usuario.correo }}</td>
+                <td>{{usuario.rol}}</td>
+               
+                <td>
+                    <button class="btn editar" (click)="editarUsuario(usuario)">Editar</button> <!-- Botón para editar -->
+                </td>
+                <td>
+                    <button class="btn eliminar" (click)="eliminarUsuario(usuario.identificacion)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="mostrarFormulario" class="datos-empleado-container">
+    <div class="datos-empleado">
+        <h2>Datos básicos del empleado</h2>
+        <form (ngSubmit)="EditUser()">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre">
+  
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" [(ngModel)]="apellido">
+  
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono">
+  
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion">
+
+            <label for="sexo">Correo</label>
+            <input type="text" id="correo" name="correo" [(ngModel)]="correo">
+
+            <label for="text">Idenfiticacion</label>
+            <input type="text" id="identificacion" name="identificacion" [(ngModel)]="identificacion">
+  
+            <label for="identificacion">Sexo</label>
+            <input type="text" id="isexo" name="sexo" [(ngModel)]="sexo" >
+  
+    
+  
+            
+            <label for="sexo">Rol</label>
+            <input type="text" id="rol" name="rol" [(ngModel)]="rol">
+            
+  
+            <button type="submit" class="enviar">Enviar datos</button>
+        </form>
+    </div>
+  </div>
+  
+
+  

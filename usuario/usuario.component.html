@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Sistema de permisos</h1>
+        </div>
+        <div class="container">
+           <button class="boton" (click)="toggleFormulario()">Registrar permiso</button>
+           <button class="boton" (click)="toggleCitas()"> Ver mis permisos</button>
+           <button (click)="onClick()" class="boton salir" >Salir</button>
+        </div>
+    
+     
+           </div>
+
+
+           <div *ngIf="mostrarFormulario" class="datos-empleado-container">
+            <div class="datos-empleado">
+                <h2>Registrar permiso</h2>
+                <form (ngSubmit)="guardarPermiso()">
+                    <label for="nombre">Nombre </label>
+                    <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre">
+          
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" [(ngModel)]="apellido">
+          
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono">
+    
+                    <label for="identificacion">Identificación</label>
+                    <input type="text" id="identificacion" name="identificacion" [(ngModel)]="identificacion" >
+                         
+                    <label for="correo">Motivo</label>
+                    <input type="text" id="motivo" name="motivo" [(ngModel)]="motivo" >
+                     
+                    <label for="correo">fecha permiso</label>
+                    <input type="date" id="fecha" name="fecha" [(ngModel)]="fecha" >
+
+                    <button type="submit" class="enviar">Enviar datos</button>
+                </form>
+            </div>
+          </div>
+
+
+
+          <div *ngIf="mostrarUsuarios && usuarios && usuarios.length > 0" class="contenedor-citas">
+            <table class="usuarios-tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Teléfono</th>
+                        <th>identificacion</th>
+                        <th>motivo</th>
+                        <th>fecha</th>
+                         <th>Estado</th>
+                         <th>Eliminar permiso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.apellido }}</td>
+                        <td>{{ usuario.telefono }}</td>
+                        <td>{{ usuario.identificacion }}</td>
+                        <td>{{usuario.motivo}}</td>
+                        <td>{{usuario.fecha}}</td>
+                        <td [ngClass]="{
+                            'estado-aprobada': usuario.estado === 'Aceptada',
+                            'estado-rechazada': usuario.estado === 'Rechazada',
+                            'estado-pendiente': !usuario.estado || usuario.estado === 'Pendiente'
+                        }">
+                        {{ usuario.estado || 'Pendiente' }}
+                    </td>
+                         <td><button class="rechazar" (click)="eliminarUsuario(usuario.identificacion)">Eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+    <div>
+        <h1>Sistema de permisos</h1>
+    </div>
+    <div class="container">
+       <button class="boton" (click)="toggleFormulario()">Registrar empleado</button>
+       <button class="boton" routerLink="/edit"> Ver usuarios</button>
+       <button class="boton" (click)=" mostrarcitas()"> Ver permisos</button>
+       <button (click)="onClick()" class="boton salir" >Salir</button>
+      
+       
+    </div>
+          
+ 
+       </div>
+
+       <div *ngIf="mostrarUsuarios && usuarios && usuarios.length > 0" class="contenedor">
+        <h2 class="usuarios-title">Lista de Usuarios</h2>
+        <table class="usuarios-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
+                    <th>Identificación</th>
+                    <th>Sexo</th>
+                    <th>contraseña</th>
+                    <th>Editar</th> <!-- Nueva columna para las acciones -->
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>{{ usuario.direccion }}</td>
+                    <td>{{ usuario.identificacion }}</td>
+                    <td>{{ usuario.sexo }}</td>
+                    <td>{{usuario.contrasena}}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td>
+                        <button class="btn editar" (click)="editarUsuario(usuario)">Editar</button> <!-- Botón para editar -->
+                    </td>
+                    <td>
+                        <button class="btn eliminar" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="mostrarcitass && citas && citas.length > 0" class="contenedor-citas">
+        <table class="usuarios-tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>identificacion</th>
+                    <th>motivo</th>
+                    <th>fecha</th>
+                     <th>Aprobar</th>
+                     <th>Rechazar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cita of citas">
+                    <td>{{ cita.nombre }}</td>
+                    <td>{{ cita.apellido }}</td>
+                    <td>{{ cita.telefono }}</td>
+                    <td>{{ cita.identificacion }}</td>
+                    <td>{{cita.motivo}}</td>
+                    <td>{{cita.fecha}}</td>
+                    <td><button class="aprobar" (click)="onAceptar(cita.identificacion)">Aprobar</button></td> 
+                    <td><button class="rechazar" (click)="onRechazar(cita.identificacion)">Rechazar</button></td>
+                     
+
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      
+      <div *ngIf="mostrarFormulario" class="datos-empleado-container">
+        <div class="datos-empleado">
+            <h2>Datos básicos del empleado</h2>
+            <form (ngSubmit)="guardarUsuario()">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre">
+      
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" [(ngModel)]="apellido">
+      
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono">
+      
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion">
+      
+                <label for="identificacion">Identificación</label>
+                <input type="text" id="identificacion" name="identificacion" [(ngModel)]="identificacion" >
+      
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" [(ngModel)]="correo">
+
+                <label for="correo">Contraseña</label>
+                <input type="text" id="contrasena" name="contrasena" [(ngModel)]="contrasena">
+                 
+                <label for="sexo">Sexo</label>
+                <input type="text" id="sexo" name="sexo" [(ngModel)]="sexo">
+                 
+                <label for="correo">Rol</label>
+                <input type="text" id="rol" name="rol" [(ngModel)]="rol" readonly>
+      
+                <button type="submit" class="enviar">Enviar datos</button>
+            </form>
+        </div>
+      </div>
+      
+  
+      
+      
+</body>
+</html>
+ 
